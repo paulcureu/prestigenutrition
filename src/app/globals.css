@@ -172,11 +172,19 @@ html.motion [data-split] { visibility: hidden; }
 /* Grila de facilități */
 .features { width: 100%; text-align: left; display: grid; gap: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(400px, 1fr); }
 .pn-feature__photo-bottom { position: absolute; left: 0; right: 0; bottom: 0; height: 230px; width: 100%; object-fit: cover; }
-.pn-feature--corner { justify-content: flex-start; gap: 16px; padding-bottom: 230px; }
+.pn-feature.pn-feature--corner { justify-content: flex-start; gap: 16px; padding-bottom: 230px; }
 .pn-feature__photo-corner { position: absolute; right: 0; bottom: 0; width: 72%; height: 200px; object-fit: cover; border-top-left-radius: var(--radius-card); }
-.pn-feature--photo-bottom { justify-content: flex-start; gap: 16px; padding-bottom: 250px; }
+.pn-feature.pn-feature--photo-bottom { justify-content: flex-start; gap: 16px; padding-bottom: 250px; }
 @media (max-width: 991px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(350px, 1fr); } .pn-feature { padding: 30px; gap: 30px; } }
-@media (max-width: 767px) { .features { grid-template-columns: 1fr; grid-auto-rows: minmax(250px, auto); } .pn-feature { padding: 20px; gap: 20px; min-height: 250px; } .pn-feature--photo-bottom { min-height: 420px; } }
+@media (max-width: 767px) {
+  .features { grid-template-columns: 1fr; grid-auto-rows: minmax(250px, auto); }
+  .pn-feature { padding: 20px; gap: 20px; min-height: 250px; }
+  /* Pe telefon fotografia stă sub text, pe toată lățimea cardului, nu peste el. */
+  .pn-feature.pn-feature--photo-bottom, .pn-feature.pn-feature--corner { padding-bottom: 0; min-height: 0; }
+  .pn-feature__photo-bottom, .pn-feature__photo-corner {
+    position: static; width: calc(100% + 40px); max-width: none; height: 220px; margin: 4px -20px 0; border-radius: 0;
+  }
+}
 
 /* Despre (titlul mare + carduri cu cifre) */
 .about__heading-wrap { position: relative; }
